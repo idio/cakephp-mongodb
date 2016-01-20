@@ -360,9 +360,9 @@ class MongodbSource extends DboSource {
 		if ($this->connected === false) {
 			return false;
 		}
-        
+
         $table = $this->fullTableName($Model);
-        
+
 		$collection = $this->_db
 			->selectCollection($table);
 		return $collection;
@@ -444,7 +444,7 @@ class MongodbSource extends DboSource {
 
 		$schema = array();
         $table = $this->fullTableName($Model);
-        
+
 		if (!empty($Model->mongoSchema) && is_array($Model->mongoSchema)) {
 			$schema = $Model->mongoSchema;
 			return $schema + array($Model->primaryKey => $this->_defaultSchema['_id']);
@@ -629,9 +629,9 @@ class MongodbSource extends DboSource {
 		if (array_key_exists('conditions', $params)) {
 			$params = $params['conditions'];
 		}
-        
+
         $table = $this->fullTableName($Model);
-        
+
 		try{
 			$return = $this->_db
 				->selectCollection($table)
@@ -668,7 +668,7 @@ class MongodbSource extends DboSource {
  * @return void
  * @access public
  */
-	public function group($params, $Model = null) {
+	public function group($params, Model $Model = null) {
 
 		if (!$this->isConnected() || count($params) === 0 || $Model === null) {
 			return false;
@@ -681,7 +681,7 @@ class MongodbSource extends DboSource {
 		$reduce = (empty($params['reduce'])) ? array() : $params['reduce'];
 		$options = (empty($params['options'])) ? array() : $params['options'];
         $table = $this->fullTableName($Model);
-        
+
 		try{
 			$return = $this->_db
 				->selectCollection($table)
@@ -714,7 +714,7 @@ class MongodbSource extends DboSource {
 
 		$this->_prepareLogQuery($Model); // just sets a timer
         $table = $this->fullTableName($Model);
-        
+
 		try{
 			$return = $this->_db
 				->selectCollection($table)
@@ -774,7 +774,7 @@ class MongodbSource extends DboSource {
 
 		$this->_convertId($data['_id']);
         $table = $this->fullTableName($Model);
-        
+
 		try{
 			$mongoCollectionObj = $this->_db
 				->selectCollection($table);
@@ -992,9 +992,9 @@ class MongodbSource extends DboSource {
 			$id = $conditions['id'];
 			unset($conditions['id']);
 		}
-        
+
         $table = $this->fullTableName($Model);
-        
+
 		$mongoCollectionObj = $this->_db
 			->selectCollection($table);
 
